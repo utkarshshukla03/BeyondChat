@@ -1,0 +1,177 @@
+{
+  "version": "1.0.0",
+  "name": "BeyondChat Article Management System",
+  "description": "Production-ready full-stack application for scraping, enhancing, and managing articles",
+  "phases": {
+    "phase1": {
+      "name": "Backend",
+      "technology": "Laravel 11",
+      "port": 8000,
+      "purpose": "Scrape articles and provide RESTful APIs",
+      "key_features": [
+        "BeyondChats blog scraping (last page, 5 oldest articles)",
+        "Article CRUD operations",
+        "Search and pagination",
+        "Database persistence with MySQL/PostgreSQL",
+        "CORS enabled"
+      ]
+    },
+    "phase2": {
+      "name": "Enhancement Engine",
+      "technology": "Node.js",
+      "standalone": true,
+      "purpose": "Enhance articles with AI using reference sources",
+      "key_features": [
+        "Google Search integration for finding references",
+        "Web scraping of reference articles",
+        "LLM integration (OpenAI, Gemini, Claude)",
+        "Automatic reference section generation",
+        "Batch processing with retry logic"
+      ]
+    },
+    "phase3": {
+      "name": "Frontend",
+      "technology": "React + Vite",
+      "port": 3000,
+      "purpose": "Display and manage articles",
+      "key_features": [
+        "Article listing with pagination",
+        "Full-text search",
+        "Type filtering (original/enhanced)",
+        "Article detail view with formatting",
+        "Responsive design",
+        "Original ↔ Enhanced article linking"
+      ]
+    }
+  },
+  "database": {
+    "tables": [
+      {
+        "name": "articles",
+        "columns": [
+          "id (BIGINT, PRIMARY KEY)",
+          "title (VARCHAR 255)",
+          "slug (VARCHAR 255, UNIQUE)",
+          "author (VARCHAR 255, NULLABLE)",
+          "published_date (TIMESTAMP, NULLABLE)",
+          "original_url (VARCHAR 255, UNIQUE)",
+          "content (LONGTEXT)",
+          "type (ENUM: original, enhanced)",
+          "original_article_id (BIGINT, FOREIGN KEY)",
+          "metadata (JSON)",
+          "created_at (TIMESTAMP)",
+          "updated_at (TIMESTAMP)",
+          "deleted_at (TIMESTAMP, NULLABLE)"
+        ],
+        "indexes": [
+          "type",
+          "published_date",
+          "created_at"
+        ],
+        "relationships": [
+          "original_article_id -> articles.id (self-referencing)"
+        ]
+      }
+    ]
+  },
+  "api_endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/articles",
+      "description": "List all articles with pagination and filtering"
+    },
+    {
+      "method": "POST",
+      "path": "/api/articles",
+      "description": "Create new article"
+    },
+    {
+      "method": "GET",
+      "path": "/api/articles/{id}",
+      "description": "Get single article with relationships"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/articles/{id}",
+      "description": "Update article"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/articles/{id}",
+      "description": "Delete article (soft delete)"
+    },
+    {
+      "method": "GET",
+      "path": "/api/articles/search",
+      "description": "Search articles by query"
+    },
+    {
+      "method": "POST",
+      "path": "/api/articles/scrape",
+      "description": "Trigger scraping of BeyondChats blogs"
+    }
+  ],
+  "environment_variables": {
+    "backend": [
+      "APP_NAME",
+      "APP_DEBUG",
+      "DB_CONNECTION",
+      "DB_HOST",
+      "DB_PORT",
+      "DB_DATABASE",
+      "DB_USERNAME",
+      "DB_PASSWORD",
+      "CORS_ALLOWED_ORIGINS"
+    ],
+    "enhancer": [
+      "LARAVEL_API_BASE_URL",
+      "LLM_PROVIDER",
+      "OPENAI_API_KEY",
+      "GEMINI_API_KEY",
+      "CLAUDE_API_KEY",
+      "GOOGLE_SEARCH_API_KEY",
+      "GOOGLE_SEARCH_ENGINE_ID",
+      "SCRAPER_TIMEOUT",
+      "BATCH_SIZE",
+      "DELAY_BETWEEN_REQUESTS"
+    ],
+    "frontend": [
+      "VITE_API_BASE_URL",
+      "VITE_APP_NAME"
+    ]
+  },
+  "setup_steps": {
+    "windows": "setup.bat",
+    "linux_macos": "setup.sh"
+  },
+  "documentation": {
+    "main": "README.md",
+    "backend": "BACKEND_SETUP.md",
+    "enhancer": "ENHANCER_SETUP.md",
+    "frontend": "FRONTEND_SETUP.md",
+    "quickstart": "QUICKSTART.md"
+  },
+  "technologies": {
+    "backend": [
+      "Laravel 11",
+      "PHP 8.2+",
+      "MySQL/PostgreSQL",
+      "Guzzle HTTP",
+      "Symfony DomCrawler"
+    ],
+    "enhancer": [
+      "Node.js 18+",
+      "Axios",
+      "Cheerio",
+      "OpenAI API",
+      "Google Search API"
+    ],
+    "frontend": [
+      "React 18",
+      "Vite",
+      "React Router",
+      "Axios",
+      "CSS3"
+    ]
+  }
+}

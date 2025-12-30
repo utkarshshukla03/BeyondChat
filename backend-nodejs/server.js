@@ -9,6 +9,8 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8000;
 
+//Ignore favicon requests
+app.get('/favicon.ico', (req, res) => res.status(204));
 // Middleware
 app.use(cors());
 app.use(express.json());
