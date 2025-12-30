@@ -1,3 +1,8 @@
+// ✅ Fix for undici / axios on Node 18 (Render)
+if (typeof global.File === 'undefined') {
+  global.File = class File {};
+}
+
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -9,8 +14,9 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8000;
 
-//Ignore favicon requests
+// ✅ Ignore favicon requests
 app.get('/favicon.ico', (req, res) => res.status(204));
+
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -28,6 +34,6 @@ app.get('/api/health', (req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`✓ Backend server running on http://localhost:${PORT}`);
-  console.log(`✓ API base: http://localhost:${PORT}/api`);
+  console.log(`✓ Backend server running on port ${PORT}`);
+  console.log(`✓ API base: /api`);
 });
