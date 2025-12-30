@@ -1,0 +1,25 @@
+{
+  "name": "beyondchat-content-enhancer",
+  "version": "1.0.0",
+  "description": "Content enhancement engine for BeyondChat articles",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "NODE_ENV=development node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["content-enhancement", "llm", "google-search"],
+  "author": "BeyondChat",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "cheerio": "^1.0.0-rc.12",
+    "dotenv": "^16.3.1",
+    "openai": "^4.28.0",
+    "@google-cloud/language": "^5.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.55.0"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "beyondchat-backend",
+  "version": "1.0.0",
+  "description": "BeyondChat Backend - Scraper and CRUD APIs",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "scrape": "node scripts/scraper.js"
+  },
+  "keywords": ["beyondchat", "scraper", "api"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "axios": "^1.6.2",
+    "cheerio": "^1.0.0-rc.12",
+    "sqlite3": "^5.1.6",
+    "dotenv": "^16.3.1",
+    "cors": "^2.8.5"
+  }
+}
