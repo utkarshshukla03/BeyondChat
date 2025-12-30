@@ -1,8 +1,3 @@
-// ✅ Fix for undici / axios on Node 18 (Render)
-if (typeof global.File === 'undefined') {
-  global.File = class File {};
-}
-
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
