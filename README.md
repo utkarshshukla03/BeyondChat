@@ -47,61 +47,61 @@ The system automates content discovery, quality enhancement, and management—al
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                     BeyondChat System                            │
+│                     BeyondChat System                           │
 ├─────────────────────────────────────────────────────────────────┤
-│                                                                   │
+│                                                                 │
 │  ┌──────────────────────────────────────────────────────────┐   │
-│  │              FRONTEND (React - Port 3000)               │   │
-│  │  ┌─────────────┬─────────────┬──────────────────────┐  │   │
-│  │  │  Articles   │   Detail    │    Search & Filter   │  │   │
-│  │  │    List     │    Page     │                      │  │   │
-│  │  └─────────────┴─────────────┴──────────────────────┘  │   │
+│  │              FRONTEND (React - Port 3000)                │   │
+│  │  ┌─────────────┬─────────────┬──────────────────────┐    │   │
+│  │  │  Articles   │   Detail    │    Search & Filter   │    │   │
+│  │  │    List     │    Page     │                      │    │   │
+│  │  └─────────────┴─────────────┴──────────────────────┘    │   │
 │  └──────────────────┬───────────────────────────────────────┘   │
-│                     │ Axios HTTP Calls                           │
+│                     │ Axios HTTP Calls                          │
 │  ┌──────────────────▼───────────────────────────────────────┐   │
 │  │        BACKEND API (Node.js Express - Port 8000)         │   │
-│  │  ┌────────────────────────────────────────────────────┐ │   │
-│  │  │ GET /api/articles         - List all articles     │ │   │
-│  │  │ GET /api/articles/:id     - Get single article   │ │   │
-│  │  │ POST /api/articles        - Create article       │ │   │
-│  │  │ PUT /api/articles/:id     - Update article       │ │   │
-│  │  │ DELETE /api/articles/:id  - Delete article       │ │   │
-│  │  │ POST /api/articles/scrape - Trigger scraping     │ │   │
-│  │  │ GET /api/articles/search  - Search articles      │ │   │
-│  │  └────────────────────────────────────────────────────┘ │   │
-│  │  ┌────────────────────────────────────────────────────┐ │   │
-│  │  │           Database (SQLite)                        │ │   │
-│  │  │  ┌──────────────────────────────────────────────┐ │ │   │
-│  │  │  │ articles table                               │ │ │   │
-│  │  │  │ - id, title, author, published_date          │ │ │   │
-│  │  │  │ - url (unique), content, excerpt             │ │ │   │
-│  │  │  │ - type (original/enhanced)                   │ │ │   │
-│  │  │  │ - related_article_id (foreign key)           │ │ │   │
-│  │  │  │ - timestamps, image_url                      │ │ │   │
-│  │  │  └──────────────────────────────────────────────┘ │ │   │
-│  │  └────────────────────────────────────────────────────┘ │   │
+│  │  ┌────────────────────────────────────────────────────┐  │   │
+│  │  │ GET /api/articles         - List all articles      │  │   │
+│  │  │ GET /api/articles/:id     - Get single article     │  │   │
+│  │  │ POST /api/articles        - Create article         │  │   │
+│  │  │ PUT /api/articles/:id     - Update article         │  │   │
+│  │  │ DELETE /api/articles/:id  - Delete article         │  │   │
+│  │  │ POST /api/articles/scrape - Trigger scraping       │  │   │
+│  │  │ GET /api/articles/search  - Search articles        │  │   │
+│  │  └────────────────────────────────────────────────────┘  │   │
+│  │  ┌────────────────────────────────────────────────────┐  │   │
+│  │  │           Database (SQLite)                        │  │   │
+│  │  │  ┌──────────────────────────────────────────────┐  │  │   │
+│  │  │  │ articles table                               │  │  │   │
+│  │  │  │ - id, title, author, published_date          │  │  │   │
+│  │  │  │ - url (unique), content, excerpt             │  │  │   │
+│  │  │  │ - type (original/enhanced)                   │  │  │   │
+│  │  │  │ - related_article_id (foreign key)           │  │  │   │
+│  │  │  │ - timestamps, image_url                      │  │  │   │
+│  │  │  └──────────────────────────────────────────────┘  │  │   │
+│  │  └────────────────────────────────────────────────────┘  │   │
 │  └──────────────────┬───────────────────────────────────────┘   │
-│                     │                                             │
-│                     │ REST API Calls                              │
+│                     │                                           │
+│                     │ REST API Calls                            │
 │  ┌──────────────────▼───────────────────────────────────────┐   │
-│  │    ENHANCEMENT ENGINE (Node.js - Standalone)            │   │
-│  │  ┌────────────────────────────────────────────────────┐ │   │
-│  │  │ 1. Fetch original articles from backend API       │ │   │
-│  │  │ 2. Search Google for related articles             │ │   │
-│  │  │ 3. Scrape reference article content               │ │   │
-│  │  │ 4. Call LLM (Gemini/OpenAI/Ollama) to enhance    │ │   │
-│  │  │ 5. Post enhanced article back to backend API      │ │   │
-│  │  └────────────────────────────────────────────────────┘ │   │
-│  │  ┌────────────────────────────────────────────────────┐ │   │
-│  │  │ External Services (Optional)                       │ │   │
-│  │  │ ├─ Google Search API (find references)            │ │   │
-│  │  │ ├─ Google Gemini API (free LLM enhancement)       │ │   │
-│  │  │ ├─ OpenAI API (GPT-3.5/4 for enhancement)         │ │   │
-│  │  │ ├─ Ollama (local LLM models)                      │ │   │
-│  │  │ └─ BeyondChats blog website (scrape source)       │ │   │
-│  │  └────────────────────────────────────────────────────┘ │   │
+│  │    ENHANCEMENT ENGINE (Node.js - Standalone)             │   │
+│  │  ┌────────────────────────────────────────────────────┐  │   │
+│  │  │ 1. Fetch original articles from backend API        │  │   │
+│  │  │ 2. Search Google for related articles              │  │   │
+│  │  │ 3. Scrape reference article content                │  │   │
+│  │  │ 4. Call LLM (Gemini/OpenAI/Ollama) to enhance      │  │   │
+│  │  │ 5. Post enhanced article back to backend API       │  │   │
+│  │  └────────────────────────────────────────────────────┘  │   │
+│  │  ┌────────────────────────────────────────────────────┐  │   │
+│  │  │ External Services (Optional)                       │  │   │
+│  │  │ ├─ Google Search API (find references)             │  │   │
+│  │  │ ├─ Google Gemini API (free LLM enhancement)        │  │   │
+│  │  │ ├─ OpenAI API (GPT-3.5/4 for enhancement)          │  │   │
+│  │  │ ├─ Ollama (local LLM models)                       │  │   │
+│  │  │ └─ BeyondChats blog website (scrape source)        │  │   │
+│  │  └────────────────────────────────────────────────────┘  │   │
 │  └──────────────────────────────────────────────────────────┘   │
-│                                                                   │
+│                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -111,7 +111,7 @@ The system automates content discovery, quality enhancement, and management—al
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    DATA FLOW OVERVIEW                        │
+│                    DATA FLOW OVERVIEW                       │
 └─────────────────────────────────────────────────────────────┘
 
 PHASE 1: SCRAPING & STORAGE
