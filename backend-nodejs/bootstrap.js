@@ -1,3 +1,5 @@
-if (typeof global.File === 'undefined') {
-  global.File = class File {};
+import { File } from 'undici';
+
+if (!global.File) {
+  global.File = File;
 }
